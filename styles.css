@@ -1,0 +1,156 @@
+body {
+    font-family: 'Press Start 2P', cursive; /* Updated font for the body */
+    color: white;
+    background-color: #19162B; /* Fallback background color */
+    background-image: url('https://mir-s3-cdn-cf.behance.net/project_modules/fs/8c41af36480857.571e5729a85e8.gif');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    text-align: center;
+    padding: 50px;
+    margin: 0;
+    min-height: 100vh;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Dark overlay to make the text more readable */
+    z-index: 0; /* Ensure it is behind all other elements */
+}
+
+.title-container {
+    background-color: rgba(25, 22, 43, 0.9); /* Slight transparency for the title background */
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 2; /* Higher than the background overlay */
+    background-image: url('https://media.moddb.com/cache/images/games/1/36/35502/thumb_620x2000/NighSceneAnim.gif'); /* Background image for the title */
+    background-size: cover; /* Cover the entire container */
+    background-position: center; /* Center the background image */
+}
+
+.folder-container {
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    align-items: center; /* Center the buttons */
+    gap: 20px; /* Space between buttons */
+    position: relative;
+    z-index: 3; /* Places folder container above the title and background */
+    margin-top: 100px; /* Lower placement of project buttons */
+}
+
+/* New container for the About Me button */
+.about-me-container {
+    margin: 20px 0; /* Space above and below the About Me button */
+}
+
+/* Style for the About Me button */
+.about-me-button {
+    background-color: transparent; /* Make the background transparent */
+    border: 2px solid white; /* Add a border to the button */
+    width: 150px; /* Width for About Me button */
+    height: 50px; /* Height for About Me button */
+    color: #fff; /* Change text color to white */
+    font-family: 'Press Start 2P', cursive; /* Font for the button */
+    font-size: 18px; /* Font size */
+    font-weight: bold; /* Bold text */
+    cursor: pointer; /* Cursor changes to pointer on hover */
+    border-radius: 5px; /* Slightly rounded corners */
+    transition: background-color 0.3s, box-shadow 0.3s; /* Transition effects for hover */
+    z-index: 4; /* Ensure the button appears above the background */
+}
+
+/* Hover effect for the About Me button */
+.about-me-button:hover {
+    background-color: rgba(25, 22, 43, 0.7); /* Darken the button on hover */
+    box-shadow: 0 0 20px 10px rgba(173, 216, 230, 0.8); /* Light blue glow */
+    animation: glow 1.5s infinite alternate; /* Glowing hover */
+}
+
+.folder-button {
+    background-color: white; /* Keep the white background */
+    border: none;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    color: #333;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    position: relative;
+    border-radius: 50%; /* Keeps the button circular */
+    box-shadow: 0 0 0 8px #19162B; /* Circular border effect */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    z-index: 4;
+    font-family: 'Press Start 2P', cursive; /* Font for the buttons */
+    
+    /* Add glowing pulse animation */
+    animation: pulse-glow 2s infinite; /* Continuous glowing animation */
+}
+
+.folder-button:hover {
+    background-color: #19162B;
+    box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.8); /* Glowing effect on hover */
+    animation: hover-grow 0.5s forwards, glow 1.5s infinite alternate; /* Glowing hover */
+}
+
+.folder-button:active {
+    transform: scale(0.98);
+}
+
+/* Add responsiveness for smaller screens */
+@media (max-width: 768px) {
+    .folder-button {
+        width: 80px;
+        height: 80px;
+    }
+
+    .about-me-button {
+        width: 100px; /* Adjust width for smaller screens */
+        height: 40px; /* Adjust height for smaller screens */
+        font-size: 16px; /* Adjust font size for smaller screens */
+    }
+}
+
+/* Keyframes for continuous glowing pulse animation */
+@keyframes pulse-glow {
+    0% {
+        box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.5);
+    }
+    100% {
+        box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.2);
+    }
+}
+
+/* Keyframes for hover grow animation */
+@keyframes hover-grow {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+/* Keyframes for hover glowing animation */
+@keyframes glow {
+    from {
+        box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.8);
+    }
+    to {
+        box-shadow: 0 0 30px 15px rgba(255, 255, 255, 1);
+    }
+}
