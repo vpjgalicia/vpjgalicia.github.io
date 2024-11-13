@@ -1,0 +1,188 @@
+/* Global Styles */
+body {
+    font-family: 'ZCOOL XiaoWei', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #71D9E2;
+}
+
+/* Hero Section */
+.hero {
+    background: url('https://republicasiamedia.com/wp-content/uploads/2024/04/bannerr-2-2.webp') no-repeat center center;
+    background-size: cover;
+    color: white;
+    padding: 100px 0;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    margin-bottom: 30px;
+}
+
+
+/* Navigation Bar */
+.navbar {
+    border-bottom: 2px solid #ddd;
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.8); /* Slight transparency */
+    border-bottom: 2px solid #ddd;
+    padding: 10px 0; /* Added padding for better spacing */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for visibility */
+    transition: opacity 0.3s ease; /* Smooth transition for opacity */
+}
+
+.navbar-nav .nav-item {
+    margin: 0 15px;
+}
+
+.navbar-nav .nav-link {
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.navbar-nav .nav-link:hover {
+    color: aquamarine;
+}
+
+/* Experiences Section */
+.experiences {
+    background-color: #71D9E2;
+    padding: 60px 0;
+}
+
+.experiences h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+}
+
+.card {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.card img {
+    height: 250px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #666;
+}
+
+.card .btn {
+    background-color: rgb(0, 128, 0);
+    border-color: aquamarine;
+}
+
+.card .btn:hover {
+    background-color: #008b8b;
+    border-color: #008b8b;
+}
+
+/* Sections */
+h3 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+h4 {
+    font-size: 1.5rem;
+    margin-top: 30px;
+    color: #333;
+}
+
+p {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+img {
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+/* About Section */
+.about {
+    background-color: #e9ecef;
+    padding: 60px 0;
+}
+
+.about img {
+    max-width: 100%;
+    border-radius: 5px;
+    margin-top: 30px;
+}
+
+/* Contact Section */
+.contact {
+    background-color: #fff;
+    padding: 60px 0;
+}
+
+.contact h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.contact .form-group {
+    margin-bottom: 20px;
+}
+
+.contact .form-control {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.contact button {
+    background-color: green;
+    border-color: aquamarine;
+}
+
+.contact button:hover {
+    background-color: #008b8b;
+    border-color: #008b8b;
+}
+
+.contact-details {
+    margin-top: 30px;
+    font-size: 1.125rem;
+    color: #555;
+}
+
+/* Footer */
+footer {
+    background-color: #343a40;
+    color: white;
+    padding: 20px 0;
+}
+
+footer p {
+    font-size: 1rem;
+    margin: 0;
+}
