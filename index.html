@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vincent Paul Galicia</title>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"> <!-- Link to the font -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Press Start 2P', cursive; /* Updated font for the body */
+            font-family: 'Press Start 2P', cursive;
             color: white;
-            background-color: #19162B; /* Fallback background color */
+            background-color: #19162B;
             background-image: url('https://mir-s3-cdn-cf.behance.net/project_modules/fs/8c41af36480857.571e5729a85e8.gif');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             text-align: center;
-            padding: 50px;
+            padding: 50px 10px;
             margin: 0;
             min-height: 100vh;
             position: relative;
@@ -28,79 +28,100 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.5); /* Dark overlay to make the text more readable */
-            z-index: 0; /* Ensure it is behind all other elements */
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 0;
         }
 
         .title-container {
-            background-color: rgba(25, 22, 43, 0.9); /* Slight transparency for the title background */
+            background-color: rgba(25, 22, 43, 0.9);
             padding: 20px;
             border-radius: 8px;
             margin-bottom: 30px;
             position: relative;
-            z-index: 2; /* Higher than the background overlay */
-            background-image: url('https://media.moddb.com/cache/images/games/1/36/35502/thumb_620x2000/NighSceneAnim.gif'); /* Background image for the title */
-            background-size: cover; /* Cover the entire container */
-            background-position: center; /* Center the background image */
+            z-index: 2;
+            background-image: url('https://media.moddb.com/cache/images/games/1/36/35502/thumb_620x2000/NighSceneAnim.gif');
+            background-size: cover;
+            background-position: center;
         }
 
         .folder-container {
             display: flex;
             justify-content: center;
             gap: 50px;
+            flex-wrap: wrap; /* Wrap items */
             position: relative;
-            z-index: 3; /* Places folder container above the title and background */
-            margin-top: 100px; /* Lower placement of project buttons */
+            z-index: 3;
+            margin-top: 50px;
         }
 
         .folder-button {
-            background-color: transparent; /* Make the background transparent */
-            border: 2px solid white; /* Add a border to the button */
-            width: 150px; /* Increased width */
-            height: 150px; /* Increased height */
+            background-color: transparent;
+            border: 2px solid white;
+            width: 150px;
+            height: 150px;
             text-align: center;
-            color: #fff; /* Change text color to white */
-            font-family: 'Press Start 2P', cursive; /* Updated font for the buttons */
-            font-size: 18px; /* Increased font size */
+            color: #fff;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 18px;
             font-weight: bold;
             cursor: pointer;
             position: relative;
-            border-radius: 50%; /* Keeps the button circular */
-            box-shadow: 0 0 0 8px #19162B; /* Circular border effect */
+            border-radius: 50%;
+            box-shadow: 0 0 0 8px #19162B;
             display: flex;
             justify-content: center;
             align-items: center;
             transition: background-color 0.3s, box-shadow 0.3s;
             z-index: 4;
-            text-decoration: none; /* Remove underline from links */
+            text-decoration: none;
         }
 
         .folder-button:hover {
-            background-color: rgba(25, 22, 43, 0.7); /* Darken the button on hover */
-            box-shadow: 0 0 20px 10px rgba(173, 216, 230, 0.8); /* Light blue glow */
-            animation: glow 1.5s infinite alternate; /* Glowing hover */
+            background-color: rgba(25, 22, 43, 0.7);
+            box-shadow: 0 0 20px 10px rgba(173, 216, 230, 0.8);
+            animation: glow 1.5s infinite alternate;
         }
 
         .folder-button:active {
             transform: scale(0.98);
         }
 
-        /* Add responsiveness for smaller screens */
+        /* Responsive Design */
         @media (max-width: 768px) {
+            .folder-container {
+                flex-direction: column; /* Stack items vertically */
+                align-items: center; /* Center items */
+                gap: 20px; /* Adjust spacing between buttons */
+            }
+
             .folder-button {
-                width: 100px; /* Adjust width for smaller screens */
-                height: 100px; /* Adjust height for smaller screens */
-                font-size: 16px; /* Optional: Adjust font size for smaller screens */
+                width: 120px; /* Reduce button size */
+                height: 120px;
+                font-size: 14px; /* Adjust font size */
             }
         }
 
-        /* Keyframes for hover glowing animation */
+        @media (max-width: 480px) {
+            .title-container h1 {
+                font-size: 20px; /* Adjust title size for small screens */
+            }
+            body {
+                padding: 20px 5px;
+            }
+
+            .folder-button {
+                width: 100px; /* Further reduce button size for very small screens */
+                height: 100px;
+                font-size: 12px;
+            }
+        }
+
         @keyframes glow {
             from {
-                box-shadow: 0 0 20px 10px rgba(173, 216, 230, 0.8); /* Light blue */
+                box-shadow: 0 0 20px 10px rgba(173, 216, 230, 0.8);
             }
             to {
-                box-shadow: 0 0 30px 15px rgba(173, 216, 230, 1); /* Brighter light blue */
+                box-shadow: 0 0 30px 15px rgba(173, 216, 230, 1);
             }
         }
     </style>
