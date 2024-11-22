@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demon Slayer API</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet"> <!-- Anime-inspired font -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Demon Slayer</h1>
+        <!-- Search bar and button -->
+        <input type="text" id="search-bar" placeholder="Search for a character...">
+        <button onclick="searchCharacter()">Search</button>
+    </header>
+
+    <section id="character-details">
+        <!-- Character details will appear here after searching -->
+    </section>
+    <script>
+        // Complete list of characters (you can expand as necessary)
+        const characters = [
+            {
+                id: 1,
+                name: "Tanjiro Kamado",
+                age: 16,
+                gender: "Male",
+                race: "Human",
+                description: "The main protagonist of Demon Slayer. Tanjiro is a kind-hearted and determined young boy. He joins the Demon Slayer Corps to find a cure for his sister, Nezuko, who was turned into a demon.",
+                img: "https://www.demonslayer-api.com/api/v1/characters/images/1.webp",
+                quote: "Work at it. All I can do is work hard! That´s the story of my life!",
+                first_arc_appearance: {
+                    name: "Final Selection",
+                    description: "Tanjiro's journey begins after his family is slaughtered by demons and his sister, Nezuko, is turned into a demon."
+                },
+                affiliation: {
+                    name: "Demon Slayer",
+                    description: "Demon Slayers are members of the Demon Slayer Corps whose main job is to hunt and slay demons."
+                },
+                combat_style: [
+                    {
+                        id: 1,
+                        name: "Sun Breathing",
+                        description: "Breathing Style only known and taught by the Kamado Family, later revealed to be the first Breathing Style.",
+                        img: "https://www.demonslayer-api.com/api/v1/combat-styles/images/sun-breathing.webp"
+                    },
+                    {
+                        id: 2,
+                        name: "Water Breathing",
+                        description: "Water Breathing is one of the five main Breathing Styles directly derived from Sun Breathing.",
+                        img: "https://www.demonslayer-api.com/api/v1/combat-styles/images/water-breathing.webp"
+                    }
+                ]
+            },
+            {
+                id: 2,
+                name: "Nezuko Kamado",
+                age: 14,
+                gender: "Female",
+                race: "Demon",
+                description: "Nezuko is Tanjiro's younger sister, who was turned into a demon after her family was slaughtered. She fights alongside Tanjiro in his quest to find a cure for her.",
+                img: "https://www.demonslayer-api.com/api/v1/characters/images/2.webp",
+                quote: "I will protect my brother.",
+                first_arc_appearance: {
+                    name: "Final Selection",
+                    description: "Nezuko's journey begins with Tanjiro as they both try to survive and find a way to transform her back into a human."
+                },
+                affiliation: {
+                    name: "Demon Slayer",
+                    description: "Demon Slayers are members of the Demon Slayer Corps whose main job is to hunt and slay demons."
+                },
+                combat_style: [
+                    {
+                        id: 1,
+                        name: "Demon Strength",
+                        description: "Nezuko possesses extraordinary physical strength and regeneration abilities as a demon.",
+                        img: "https://static1.cbrimages.com/wordpress/wp-content/uploads/2024/01/nezuko-demon-form-demon-slayer.jpg"
+                    }
+                ]
+            },
+            {
+                id: 3,
+                name: "Shinobu Kocho",
+                age: 18,
+                gender: "Female",
+                race: "Human",
+                description: "Shinobu is the Insect Hashira and a member of the Demon Slayer Corps. She is known for her calm demeanor and scientific approach to fighting demons.",
+                img: "https://www.demonslayer-api.com/api/v1/characters/images/6.webp",
+                quote: "You should learn to enjoy yourself more.",
+                first_arc_appearance: {
+                    name: "Asakusa Arc",
+                    description: "Shinobu is introduced as a Hashira who trains Tanjiro and others in the ways of demon slaying and teaches them the use of poisons."
+                },
+                affiliation: {
+                    name: "Demon Slayer",
+                    description: "Demon Slayers are members of the Demon Slayer Corps whose main job is to hunt and slay demons."
+                },
+                combat_style: [
+                    {
+                        id: 1,
+                        name: "Insect Breathing",
+                        description: "Insect Breathing is a Breathing Style used by Shinobu that focuses on swift, precise strikes and utilizing poison.",
+                        img: "https://www.demonslayer-api.com/api/v1/combat-styles/images/insect-breathing.webp"
+                    }
+                ]
+            },
+            {
+                id: 4,
+                name: "Zenitsu Agatsuma",
+                age: 16,
+                gender: "Male",
+                race: "Human",
+                description: "Zenitsu is a member of the Demon Slayer Corps and one of Tanjiro's friends. Though he is cowardly and lacks self-confidence, his combat skills are formidable when he overcomes his fear.",
+                img: "https://www.demonslayer-api.com/api/v1/characters/images/3.webp",
+                quote: "I don't want to die!",
+                first_arc_appearance: {
+                    name: "Final Selection",
+                    description: "Zenitsu's journey begins when he joins the Demon Slayer Corps and trains to become a demon slayer, discovering his potential despite his insecurities."
+                },
+                affiliation: {
+                    name: "Demon Slayer",
+                    description: "Demon Slayers are members of the Demon Slayer Corps whose main job is to hunt and slay demons."
+                },
+                combat_style: [
+                    {
+                        id: 1,
+                        name: "Thunder Breathing",
+                        description: "Thunder Breathing is a Breathing Style that uses techniques based on the speed and power of lightning.",
+                        img: "https://www.demonslayer-api.com/api/v1/combat-styles/images/thunder-breathing.webp"
+                    }
+                ]
+            },
+            {
+                id: 5,
+                name: "Muzan Kibutsuji",
+                age: "Unknown",
+                gender: "Male",
+                race: "Demon",
+                description: "Muzan Kibutsuji is the leader of the demons and the primary antagonist of Demon Slayer. He is responsible for turning Nezuko into a demon.",
+                img: "https://www.demonslayer-api.com/api/v1/characters/images/8.webp",
+                quote: "Humans are weak, and demons are strong.",
+                first_arc_appearance: {
+                    name: "Mugen Train",
+                    description: "Muzan is first seen during the Mugen Train arc, where he is revealed as the ultimate enemy behind the creation of demons."
+                },
+                affiliation: {
+                    name: "Demon",
+                    description: "Muzan leads the demons, using his power to create demons and control them."
+                },
+                combat_style: [
+                    {
+                        id: 1,
+                        name: "Demon Powers",
+                        description: "Muzan has the ability to control demons and regenerate his body, making him nearly immortal.",
+                        img: "https://www.looper.com/img/gallery/the-real-reason-muzan-is-so-powerful-in-demon-slayer/l-intro-1627168716.jpg"
+                    }
+                ]
+            },
+            {
+                id: 6,
+                name: "Giyu Tomioka",
+                age: 19,
+                gender: "Male",
+                race: "Human",
+                description: "Giyu is the Water Hashira and one of the most powerful Demon Slayer Corps members. He is known for his quiet and stoic nature.",
+                img: "https://www.demonslayer-api.com/api/v1/characters/images/7.webp",
+                quote: "You can’t defeat the demons unless you stand and fight.",
+                first_arc_appearance: {
+                    name: "Final Selection",
+                    description: "Giyu is introduced as a key figure in the Final Selection, where he helps Tanjiro in his early journey as a demon slayer."
+                },
+                affiliation: {
+                    name: "Demon Slayer",
+                    description: "Demon Slayers are members of the Demon Slayer Corps whose main job is to hunt and slay demons."
+                },
+                combat_style: [
+                    {
+                        id: 1,
+                        name: "Water Breathing",
+                        description: "Water Breathing is one of the main Breathing Styles, and Giyu is one of the most skilled practitioners of this style.",
+                        img: "https://www.demonslayer-api.com/api/v1/combat-styles/images/water-breathing.webp"
+                    }
+                ]
+            },
+            {
+                id: 7,
+                name: "Inosuke Hashibira",
+                age: 15,
+                gender: "Male",
+                race: "Human",
+                description: "Inosuke is a Demon Slayer and a close companion to Tanjiro. He was raised by boars and is known for his fierce and competitive nature.",
+                img: "https://www.demonslayer-api.com/api/v1/characters/images/9.webp",
+                quote: "I’m the best there is!",
+                first_arc_appearance: {
+                    name: "Final Selection",
+                    description: "Inosuke is introduced as one of the Demon Slayer Corps members who becomes one of Tanjiro's allies after they meet in battle."
+                },
+                affiliation: {
+                    name: "Demon Slayer",
+                    description: "Demon Slayers are members of the Demon Slayer Corps whose main job is to hunt and slay demons."
+                },
+                combat_style: [
+                    {
+                        id: 1,
+                        name: "Beast Breathing",
+                        description: "Beast Breathing is an aggressive Breathing Style developed by Inosuke, mimicking the movements of beasts.",
+                        img: "https://www.demonslayer-api.com/api/v1/combat-styles/images/beast-breathing.webp"
+                    }
+                ]
+            },
+            {
+                id: 8,
+                name: "Kanao Tsuyuri",
+                age: 16,
+                gender: "Female",
+                race: "Human",
+                description: "Kanao is the Tsuyuri Family's adopted daughter and the Flower Hashira. She has a calm demeanor but is a fierce and skilled fighter.",
+                img: "https://www.demonslayer-api.com/api/v1/characters/images/10.webp",
+                quote: "I do not have the right to choose my own life.",
+                first_arc_appearance: {
+                    name: "Final Selection",
+                    description: "Kanao is introduced as a member of the Demon Slayer Corps, later becoming a Hashira after training under the guidance of Shinobu."
+                },
+                affiliation: {
+                    name: "Demon Slayer",
+                    description: "Demon Slayers are members of the Demon Slayer Corps whose main job is to hunt and slay demons."
+                },
+                combat_style: [
+                    {
+                        id: 1,
+                        name: "Flower Breathing",
+                        description: "Flower Breathing is a Breathing Style that Kanao uses, focusing on swift movements and graceful, precise strikes.",
+                        img: "https://static0.gamerantimages.com/wordpress/wp-content/uploads/2023/04/flower-breathing-s-fourth-form-crimson-hanagoromo-in-demon-slayer-cropped.jpg"
+                    }
+                ]
+            },
+            {
+                id: 9,
+                name: "Mitsuri Kanroji",
+                age: 19,
+                gender: "Female",
+                race: "Human",
+                description: "Mitsuri is the Love Hashira of the Demon Slayer Corps. Known for her cheerful personality, she is also incredibly strong with a unique combat style.",
+                img: "https://www.demonslayer-api.com/api/v1/characters/images/11.webp",
+                quote: "The most important thing is to protect the people you love.",
+                first_arc_appearance: {
+                    name: "Final Selection",
+                    description: "Mitsuri is introduced later as one of the Hashira, where she trains and supports Tanjiro in his journey."
+                },
+                affiliation: {
+                    name: "Demon Slayer",
+                    description: "Demon Slayers are members of the Demon Slayer Corps whose main job is to hunt and slay demons."
+                },
+                combat_style: [
+                    {
+                        id: 1,
+                        name: "Love Breathing",
+                        description: "Love Breathing is a Breathing Style used by Mitsuri that is based on her passion, emphasizing fluid, rapid movements.",
+                        img: "https://www.demonslayer-api.com/api/v1/combat-styles/images/love-breathing.webp"
+                    }
+                ]
+            },
+            {
+                id: 10,
+                name: "Rengoku Kyojuro",
+                age: 20,
+                gender: "Male",
+                race: "Human",
+                description: "Rengoku is the Flame Hashira, known for his fiery spirit and intense sense of justice. He is passionate about protecting others and fighting demons.",
+                img: "https://www.demonslayer-api.com/api/v1/characters/images/12.webp",
+                quote: "The flame of life can never go out as long as we keep fighting.",
+                first_arc_appearance: {
+                    name: "Mugen Train",
+                    description: "Rengoku is introduced as a prominent figure in the Mugen Train arc, where he joins Tanjiro and others to fight the demons aboard the train."
+                },
+                affiliation: {
+                    name: "Demon Slayer",
+                    description: "Demon Slayers are members of the Demon Slayer Corps whose main job is to hunt and slay demons."
+                },
+                combat_style: [
+                    {
+                        id: 1,
+                        name: "Flame Breathing",
+                        description: "Flame Breathing is a Breathing Style used by Rengoku that focuses on powerful, explosive attacks designed to overpower opponents.",
+                        img: "https://www.demonslayer-api.com/api/v1/combat-styles/images/flame-breathing.webp"
+                    }
+                ]
+            },
+            {
+                id: 11,
+                name: "Akaza",
+                age: "Unknown",
+                gender: "Male",
+                race: "Demon",
+                description: "Akaza is one of the Twelve Kizuki and serves as one of the primary antagonists in the series. He is known for his powerful combat skills and his desire to fight strong opponents.",
+                img: "https://www.demonslayer-api.com/api/v1/characters/images/13.webp",
+                quote: "Your pain will never end as long as you're alive!",
+                first_arc_appearance: {
+                    name: "Mugen Train",
+                    description: "Akaza appears during the Mugen Train arc as one of the main antagonists, battling against Rengoku."
+                },
+                affiliation: {
+                    name: "Demon",
+                    description: "Akaza is a member of the Twelve Kizuki, the elite demons who serve Muzan Kibutsuji."
+                },
+                combat_style: [
+                    {
+                        id: 1,
+                        name: "Destructive Art",
+                        description: "Akaza uses a unique fighting style that focuses on overwhelming speed and strength with devastating punches.",
+                        img: "https://wallpapers.com/images/hd/demon-slayer-akaza-destructive-death-technique-xauathyyyr12l3lo.jpg"
+                    }
+                ]
+            },
+            {
+                id: 12,
+                name: "Obanai Iguro",
+                age: 21,
+                gender: "Male",
+                race: "Human",
+                description: "Obanai is the Serpent Hashira and a skilled swordsman of the Demon Slayer Corps. He is serious and stoic but has a deep sense of loyalty to his comrades.",
+                img: "https://www.demonslayer-api.com/api/v1/characters/images/14.webp",
+                quote: "I’ll keep fighting. I’ll never stop.",
+                first_arc_appearance: {
+                    name: "Final Selection",
+                    description: "Obanai is introduced as one of the Hashira, where he plays a supporting role in the training and guidance of the younger demon slayers."
+                },
+                affiliation: {
+                    name: "Demon Slayer",
+                    description: "Demon Slayers are members of the Demon Slayer Corps whose main job is to hunt and slay demons."
+                },
+                combat_style: [
+                    {
+                        id: 1,
+                        name: "Serpent Breathing",
+                        description: "Serpent Breathing is a Breathing Style used by Obanai that mimics the serpentine movements, allowing for swift and precise strikes.",
+                        img: "https://www.demonslayer-api.com/api/v1/combat-styles/images/serpent-breathing.webp"
+                    }
+                ]
+            },
+            {
+                id: 13,
+                name: "Genya Shinazugawa",
+                age: 16,
+                gender: "Male",
+                race: "Human",
+                description: "Genya is the younger brother of Sanemi Shinazugawa. He has a more aggressive nature and is known for his ability to use demon blood powers in combat.",
+                img: "https://www.demonslayer-api.com/api/v1/characters/images/15.webp",
+                quote: "I’ll never forgive demons for what they did to my family.",
+                first_arc_appearance: {
+                    name: "Final Selection",
+                    description: "Genya is introduced during the Final Selection, where he initially struggles but later proves himself as a capable fighter."
+                },
+                affiliation: {
+                    name: "Demon Slayer",
+                    description: "Demon Slayers are members of the Demon Slayer Corps whose main job is to hunt and slay demons."
+                },
+                combat_style: [
+                    {
+                        id: 1,
+                        name: "Demon Slayer Powers",
+                        description: "Genya has the ability to temporarily consume demon flesh to gain enhanced abilities, making him unique among demon slayers.",
+                        img: "https://hips.hearstapps.com/hmg-prod/images/demon-slayer-genya-6458f9191836a.png"
+                    }
+                ]
+            },
+            {
+                id: 14,
+                name: "Sanemi Shinazugawa",
+                age: 21,
+                gender: "Male",
+                race: "Human",
+                description: "Sanemi is the Wind Hashira and one of the strongest members of the Demon Slayer Corps. Known for his volatile personality and fierce fighting style, he is a key figure in the battle against demons.",
+                img: "https://www.demonslayer-api.com/api/v1/characters/images/16.webp",
+                quote: "I’ll tear you apart! I won’t let you harm anyone else!",
+                first_arc_appearance: {
+                    name: "Final Selection",
+                    description: "Sanemi is introduced as one of the Hashira, where he leads efforts to train and strengthen the Demon Slayer Corps."
+                },
+                affiliation: {
+                    name: "Demon Slayer",
+                    description: "Demon Slayers are members of the Demon Slayer Corps whose main job is to hunt and slay demons."
+                },
+                combat_style: [
+                    {
+                        id: 1,
+                        name: "Wind Breathing",
+                        description: "Wind Breathing is a Breathing Style used by Sanemi that focuses on using wind to enhance his sword strikes, making them swift and deadly.",
+                        img: "https://www.demonslayer-api.com/api/v1/combat-styles/images/wind-breathing.webp"
+                    }
+                ]
+            },
+            {
+                id: 15,
+                name: "Muichiro Tokito",
+                age: 14,
+                gender: "Male",
+                race: "Human",
+                description: "Muichiro is the Mist Hashira and one of the youngest to achieve this rank. He is known for his aloof personality and incredible mastery over the Mist Breathing techniques.",
+                img: "https://www.demonslayer-api.com/api/v1/characters/images/17.webp",
+                quote: "I’m not the kind of person who thinks too much.",
+                first_arc_appearance: {
+                    name: "Mugen Train",
+                    description: "Muichiro is introduced as a Hashira in the Mugen Train arc, where he helps in the fight against powerful demons."
+                },
+                affiliation: {
+                    name: "Demon Slayer",
+                    description: "Demon Slayers are members of the Demon Slayer Corps whose main job is to hunt and slay demons."
+                },
+                combat_style: [
+                    {
+                        id: 1,
+                        name: "Mist Breathing",
+                        description: "Mist Breathing is a Breathing Style used by Muichiro that focuses on rapid, unpredictable strikes, making it difficult for enemies to anticipate his movements.",
+                        img: "https://www.demonslayer-api.com/api/v1/combat-styles/images/mist-breathing.webp"
+                    }
+                ]
+            },
+            {
+                id: 16,
+                name: "Rengoku Kyojuro",
+                age: 20,
+                gender: "Male",
+                race: "Human",
+                description: "Rengoku is the Flame Hashira and one of the most passionate and fierce members of the Demon Slayer Corps. He is known for his strong sense of justice and unwavering commitment to protecting others.",
+                img: "https://www.demonslayer-api.com/api/v1/characters/images/18.webp",
+                quote: "Set your heart ablaze!",
+                first_arc_appearance: {
+                    name: "Mugen Train",
+                    description: "Rengoku is introduced during the Mugen Train arc, where he takes a central role in the fight against powerful demons while guiding Tanjiro and his friends."
+                },
+                affiliation: {
+                    name: "Demon Slayer",
+                    description: "Demon Slayers are members of the Demon Slayer Corps whose main job is to hunt and slay demons."
+                },
+                combat_style: [
+                    {
+                        id: 1,
+                        name: "Flame Breathing",
+                        description: "Flame Breathing is a Breathing Style used by Rengoku that focuses on powerful, fiery strikes, representing the strength of fire and passion.",
+                        img: "https://www.demonslayer-api.com/api/v1/combat-styles/images/flame-breathing.webp"
+                    }
+                ]
+            },
+            {
+                id: 17,
+                name: "Tamayo",
+                age: "Unknown",
+                gender: "Female",
+                race: "Demon",
+                description: "Tamayo is a demon who possesses great medical knowledge and is one of the few demons who retains her humanity. She is an ally of the Demon Slayer Corps in their fight against Muzan.",
+                img: "https://www.demonslayer-api.com/api/v1/characters/images/20.webp",
+                quote: "I’ll do everything I can to help you.",
+                first_arc_appearance: {
+                    name: "Mugen Train",
+                    description: "Tamayo is introduced in the Mugen Train arc, where she helps Tanjiro and others by offering medical expertise in their fight against demons."
+                },
+                affiliation: {
+                    name: "Demon Slayer",
+                    description: "Tamayo is a demon who works with the Demon Slayer Corps to fight Muzan and other demons."
+                },
+                combat_style: [
+                    {
+                        id: 1,
+                        name: "Blood Demon Art",
+                        description: "Tamayo uses her Blood Demon Art to manipulate her blood for healing and other abilities, including creating powerful poisons and using medicinal powers.",
+                        img: "https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/e/ea/Tamayo_claims_she_only_wanted_to_live.png/revision/latest?cb=20240702085740"
+                    }
+                ]
+            },
+            {
+                id: 18,
+                name: "Yushiro",
+                age: "Unknown",
+                gender: "Male",
+                race: "Demon",
+                description: "Yushiro is a demon who was once a human but became a demon due to his connection with Tamayo. He has a strong bond with her and assists the Demon Slayer Corps in their fight against Muzan.",
+                img: "https://www.demonslayer-api.com/api/v1/characters/images/21.webp",
+                quote: "I will protect her with my life.",
+                first_arc_appearance: {
+                    name: "Mugen Train",
+                    description: "Yushiro is introduced alongside Tamayo in the Mugen Train arc, where he helps the demon slayers and provides assistance in battling Muzan’s forces."
+                },
+                affiliation: {
+                    name: "Demon Slayer",
+                    description: "Yushiro is a demon who works with Tamayo to fight against Muzan and his demon army."
+                },
+                combat_style: [
+                    {
+                        id: 1,
+                        name: "Blood Demon Art",
+                        description: "Yushiro uses his own form of Blood Demon Art, which allows him to create illusions and manipulate shadows to deceive and trap his enemies.",
+                        img: "https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/e/ea/Tamayo_claims_she_only_wanted_to_live.png/revision/latest?cb=20240702085740"
+                    }
+                ]
+            },
+            {
+                id: 19,
+                name: "Himejima Gyomei",
+                age: 27,
+                gender: "Male",
+                race: "Human",
+                description: "Gyomei is the Stone Hashira and one of the strongest members of the Demon Slayer Corps. Despite his intimidating appearance, he is gentle-hearted and deeply cares for his comrades.",
+                img: "https://www.demonslayer-api.com/api/v1/characters/images/22.webp",
+                quote: "I will fight for the sake of everyone who can’t fight anymore.",
+                first_arc_appearance: {
+                    name: "Final Selection",
+                    description: "Gyomei is introduced in the Final Selection arc, where he is shown to be a stoic and powerful warrior who becomes an important mentor to Tanjiro and the others."
+                },
+                affiliation: {
+                    name: "Demon Slayer",
+                    description: "Demon Slayers are members of the Demon Slayer Corps whose main job is to hunt and slay demons."
+                },
+                combat_style: [
+                    {
+                        id: 1,
+                        name: "Stone Breathing",
+                        description: "Stone Breathing is a Breathing Style used by Gyomei that focuses on powerful, crushing strikes, mimicking the unyielding force of stone.",
+                        img: "https://pm1.aminoapps.com/7637/57ea14e115fe7c29b5c8a2f7ae4b5f7356104dd2r1-366-542v2_uhq.jpg"
+                    }
+                ]
+            },
+            {
+                id: 20,
+                name: "Mitsuri Kanroji",
+                age: 19,
+                gender: "Female",
+                race: "Human",
+                description: "Mitsuri is the Love Hashira of the Demon Slayer Corps. She is known for her extreme strength and speed, and her affectionate, cheerful personality.",
+                img: "https://www.demonslayer-api.com/api/v1/characters/images/23.webp",
+                quote: "I believe love is the most important thing in the world.",
+                first_arc_appearance: {
+                    name: "Asakusa Arc",
+                    description: "Mitsuri is introduced in the Asakusa Arc as the Love Hashira, known for her combat prowess and warm-hearted nature."
+                },
+                affiliation: {
+                    name: "Demon Slayer",
+                    description: "Demon Slayers are members of the Demon Slayer Corps whose main job is to hunt and slay demons."
+                },
+                combat_style: [
+                    {
+                        id: 1,
+                        name: "Love Breathing",
+                        description: "Love Breathing is a Breathing Style used by Mitsuri that combines extreme flexibility and fluid movements, focused on rapid and powerful strikes.",
+                        img: "https://www.demonslayer-api.com/api/v1/combat-styles/images/love-breathing.webp"
+                    }
+                ]
+            },
+            {
+                id: 21,
+                name: "Sanemi Shinazugawa",
+                age: 21,
+                gender: "Male",
+                race: "Human",
+                description: "Sanemi is the Wind Hashira, known for his sharp tongue and aggressive nature. He is fiercely protective of his comrades and is considered one of the most powerful fighters in the Demon Slayer Corps.",
+                img: "https://www.demonslayer-api.com/api/v1/characters/images/24.webp",
+                quote: "I’ll kill you! I’ll kill every last one of you!",
+                first_arc_appearance: {
+                    name: "Asakusa Arc",
+                    description: "Sanemi is introduced as the Wind Hashira, a brutal and powerful fighter with a strong dislike for demons and an intense personality."
+                },
+                affiliation: {
+                    name: "Demon Slayer",
+                    description: "Demon Slayers are members of the Demon Slayer Corps whose main job is to hunt and slay demons."
+                },
+                combat_style: [
+                    {
+                        id: 1,
+                        name: "Wind Breathing",
+                        description: "Wind Breathing is a Breathing Style used by Sanemi that focuses on slashing techniques with speed and precision, resembling the swiftness and power of wind.",
+                        img: "https://www.demonslayer-api.com/api/v1/combat-styles/images/wind-breathing.webp"
+                    }
+                ]
+            },
+            {
+                id: 22,
+                name: "Kibutsuji Muzan",
+                age: "Unknown",
+                gender: "Male",
+                race: "Demon",
+                description: "Muzan Kibutsuji is the leader of the demons and the primary antagonist of Demon Slayer. He is responsible for creating demons and serves as the ultimate threat to the Demon Slayer Corps.",
+                img: "https://www.demonslayer-api.com/api/v1/characters/images/25.webp",
+                quote: "I will not die until I turn every human into a demon.",
+                first_arc_appearance: {
+                    name: "Mugen Train",
+                    description: "Muzan is introduced in the Mugen Train arc, where he is revealed as the mastermind behind the creation of demons and the source of much destruction."
+                },
+                affiliation: {
+                    name: "Demon",
+                    description: "Muzan is the supreme leader of the demons, responsible for creating all other demons and trying to wipe out humanity."
+                },
+                combat_style: [
+                    {
+                        id: 1,
+                        name: "Demon Powers",
+                        description: "Muzan possesses immense regenerative abilities, superhuman strength, and the power to control other demons, making him nearly impossible to defeat.",
+                        img: "https://www.demonslayer-api.com/api/v1/combat-styles/images/demon-powers.webp"
+                    }
+                ]
+            },
+            {
+                id: 23,
+                name: "Gyutaro",
+                age: "Unknown",
+                gender: "Male",
+                race: "Demon",
+                description: "Gyutaro is one of the Upper Rank demons in the Twelve Kizuki. He is a cruel and sadistic demon, known for his strength and his connection with his sister, Daki.",
+                img: "https://www.demonslayer-api.com/api/v1/characters/images/26.webp",
+                quote: "The weak will die, and the strong will live.",
+                first_arc_appearance: {
+                    name: "Entertainment District Arc",
+                    description: "Gyutaro is introduced during the Entertainment District Arc, where he fights Tanjiro and his companions alongside his sister, Daki."
+                },
+                affiliation: {
+                    name: "Demon",
+                    description: "Gyutaro is a demon under Muzan Kibutsuji’s rule, serving as one of the Upper Rank demons in the Twelve Kizuki."
+                },
+                combat_style: [
+                    {
+                        id: 1,
+                        name: "Blood Demon Art",
+                        description: "Gyutaro's Blood Demon Art allows him to manipulate his blood, using it to control deadly weapons and perform powerful attacks.",
+                        img: "https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/e/ea/Tamayo_claims_she_only_wanted_to_live.png/revision/latest?cb=20240702085740"
+                    }
+                ]
+            },
+            {
+                id: 24,
+                name: "Daki",
+                age: "Unknown",
+                gender: "Female",
+                race: "Demon",
+                description: "Daki is one of the Upper Rank demons in the Twelve Kizuki and is Gyutaro's sister. She is a sadistic and vengeful demon who takes great pleasure in tormenting others.",
+                img: "https://www.demonslayer-api.com/api/v1/characters/images/27.webp",
+                quote: "You’ll regret this. You should never have come here.",
+                first_arc_appearance: {
+                    name: "Entertainment District Arc",
+                    description: "Daki is introduced in the Entertainment District Arc as one of the main antagonists, using her power to fight Tanjiro and his friends."
+                },
+                affiliation: {
+                    name: "Demon",
+                    description: "Daki is a demon serving under Muzan Kibutsuji, and along with her brother Gyutaro, is one of the Upper Rank demons."
+                },
+                combat_style: [
+                    {
+                        id: 1,
+                        name: "Blood Demon Art",
+                        description: "Daki uses a Blood Demon Art that allows her to manipulate her obi (sash) into deadly weapons that can decapitate and trap her enemies.",
+                        img: "https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/e/ea/Tamayo_claims_she_only_wanted_to_live.png/revision/latest?cb=20240702085740"
+                    }
+                ]
+            }
+
+
+            // Add other characters as per your list in a similar structure
+        ];
+
+        // Function to display character details
+        function displayCharacter(character) {
+            const characterDetailsSection = document.getElementById('character-details');
+            const characterHTML = `
+                <div class="character">
+                    <img src="${character.img}" alt="${character.name}">
+                    <h2>${character.name}</h2>
+                    <p><strong>Age:</strong> ${character.age}</p>
+                    <p><strong>Gender:</strong> ${character.gender}</p>
+                    <p><strong>Race:</strong> ${character.race}</p>
+                    <p><strong>Description:</strong> ${character.description}</p>
+                    <p><strong>Quote:</strong> "${character.quote}"</p>
+
+                    <h3>First Arc: ${character.first_arc_appearance.name}</h3>
+                    <p>${character.first_arc_appearance.description}</p>
+
+                    <h3>Affiliation</h3>
+                    <p><strong>${character.affiliation.name}:</strong> ${character.affiliation.description}</p>
+
+                    <h3>Combat Style</h3>
+                    <ul>
+                        ${character.combat_style.map(style => `
+                            <li>
+                                <h4>${style.name}</h4>
+                                <p>${style.description}</p>
+                                <img src="${style.img}" alt="${style.name}">
+                            </li>
+                        `).join('')}
+                    </ul>
+                </div>
+            `;
+            characterDetailsSection.innerHTML = characterHTML;
+        }
+
+        // Function to search and display character
+        function searchCharacter() {
+            const searchQuery = document.getElementById('search-bar').value.toLowerCase();
+            const character = characters.find(c => c.name.toLowerCase().includes(searchQuery));
+            if (character) {
+                displayCharacter(character);
+            } else {
+                document.getElementById('character-details').innerHTML = "<p>No character found!</p>";
+            }
+        }
+    </script>
+</body>
+</html>
