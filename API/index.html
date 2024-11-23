@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Country API</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css"> <!-- Link to the external CSS file -->
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Header Section with Image -->
+  <div class="header">
+    <h1 class="animated-text">Country Lookup</h1>
+  </div>
+
+  <div class="container my-5">
+    <div class="row mb-4">
+      <div class="col-12 d-flex justify-content-center">
+        <!-- Search input field -->
+        <input type="text" id="search" class="form-control search-bar" placeholder="Search for a country...">
+        <!-- Search button -->
+        <button class="btn btn-primary search-button" onclick="searchCountries()">Search</button>
+      </div>
+    </div>
+
+    <!-- Container for country cards -->
+    <div id="countries-container" class="row">
+      <!-- Country cards will be displayed here after search -->
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
