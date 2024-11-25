@@ -1,6 +1,6 @@
 
 body {
-    background-image: url('https://i.pinimg.com/736x/e3/7d/2b/e37d2b165388113b1f62474d1da56310.jpg'); 
+    background-image: url('https://i.pinimg.com/736x/be/6c/4c/be6c4cbf898d9399f2ff6d807606d5eb.jpg'); 
     background-size: cover;
     background-position: center;
     background-attachment: fixed; 
@@ -17,7 +17,7 @@ body {
   .header {
     background-size: cover;
     background-position: center;
-    color: white;
+    color: black;
     padding: 50px 0;
     text-align: center;
   }
