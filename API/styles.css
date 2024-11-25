@@ -1,9 +1,9 @@
-/* Set up default font and body styling */
+
 body {
-    background-image: url('https://media0.giphy.com/avatars/LatinxHeritage/W8HW7VLLyufK.gif'); /* Replace with your page background image URL */
+    background-image: url('https://i.pinimg.com/736x/e3/7d/2b/e37d2b165388113b1f62474d1da56310.jpg'); 
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; /* Makes the background stay fixed on scroll */
+    background-attachment: fixed; 
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
@@ -14,7 +14,6 @@ body {
     padding: 0;
   }
   
-  /* Header Styling */
   .header {
     background-size: cover;
     background-position: center;
@@ -30,7 +29,6 @@ body {
     font-family: 'Bangers', sans-serif;
   }
   
-  /* Subtitle Styling */
   .subtitle {
     font-size: 1.5rem;
     font-weight: 300;
@@ -40,13 +38,11 @@ body {
     margin-bottom: 40px;
   }
   
-  /* Animated text styling */
   .animated-text {
     display: inline-block;
     animation: wave 1.5s ease-in-out infinite;
   }
   
-  /* Keyframe animation for text */
   @keyframes wave {
     0%, 100% {
       transform: translateY(0);
@@ -56,7 +52,6 @@ body {
     }
   }
   
-  /* Search container and elements styling */
   .container {
     margin-top: 30px;
     width: 100%;
@@ -69,7 +64,6 @@ body {
     align-items: center;
   }
   
-  /* Smaller search bar */
   .search-bar {
     font-size: 1rem;
     padding: 8px;
@@ -80,7 +74,6 @@ body {
     margin-right: 10px;
   }
   
-  /* Smaller search button */
   .search-button {
     font-size: 1rem;
     padding: 8px 15px;
@@ -93,7 +86,6 @@ body {
     color: white;
   }
   
-  /* Container for country cards */
   #countries-container {
     display: none;
     display: flex;
@@ -150,7 +142,6 @@ body {
     border-radius: 0 0 8px 8px;
   }
   
-  /* Center content adjustments */
   .row {
     display: flex;
     justify-content: center;
