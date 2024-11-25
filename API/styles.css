@@ -17,7 +17,7 @@ body {
   .header {
     background-size: cover;
     background-position: center;
-    color: black;
+    color: white;
     padding: 50px 0;
     text-align: center;
   }
@@ -37,7 +37,7 @@ body {
     margin-top: 20px;
     margin-bottom: 40px;
   }
-  
+
   .animated-text {
     display: inline-block;
     animation: wave 1.5s ease-in-out infinite;
@@ -148,11 +148,5 @@ body {
     align-items: center;
   }
   
-  .subtitle {
-    font-size: 1.5rem;
-    font-weight: 300;
-    text-align: center;
-    margin-top: 20px;
-    margin-bottom: 40px;
-  }
+  
   
