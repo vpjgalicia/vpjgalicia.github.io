@@ -1,12 +1,11 @@
 const searchInput = document.getElementById('search');
 const countriesContainer = document.getElementById('countries-container');
 
-// Function to fetch and display countries based on the search
 async function searchCountries() {
   const query = searchInput.value.toLowerCase();
   
   if (query === '') {
-    countriesContainer.style.display = 'none'; // Hide the container if search is empty
+    countriesContainer.style.display = 'none'; 
     return;
   }
 
@@ -20,19 +19,18 @@ async function searchCountries() {
     );
 
     if (filteredCountries.length > 0) {
-      countriesContainer.style.display = 'flex'; // Show the container if results are found
+      countriesContainer.style.display = 'flex'; 
       displayCountries(filteredCountries);
     } else {
-      countriesContainer.style.display = 'none'; // Hide if no countries match
+      countriesContainer.style.display = 'none'; 
     }
   } catch (error) {
     console.error('Error fetching countries:', error);
   }
 }
 
-// Function to display country cards
 function displayCountries(countries) {
-  countriesContainer.innerHTML = ''; // Clear previous results
+  countriesContainer.innerHTML = ''; 
 
   countries.forEach(country => {
     const countryCard = document.createElement('div');
